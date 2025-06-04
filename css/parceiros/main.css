@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Inter';
+}
+
+main{
+    background-color: #DDE6ED;
+    width: 100%;
+    height: 700px;
+    align-items: center;
+}
+
+div{
+    margin-right: 7%;
+}
+
+.card{
+    height: 700px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.grupo2{
+    background-color: #000;
+}
+
+img{
+    background-color: #000;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
+    height: 200px;
+    width: 100%;
+}
+
+a{
+    transition: transform 0.2s ease;
+}
+
+a:hover{
+    transform: scale(1.1);
+}
+

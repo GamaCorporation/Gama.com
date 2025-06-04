@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #175C86;
+    font-family: 'Inter';
+}
+
+main{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+div{
+    margin-right: 5%;
+}
+
+img{
+    height: 300px;
+    width: 300px;
+}
