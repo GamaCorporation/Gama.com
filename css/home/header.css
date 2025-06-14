@@ -6,15 +6,16 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
-
-
     width: 100%;
     height: 12%;
+    background: #175C86;
+}
+html {
+  scroll-padding-top: 80px;
+}
 
-
-
-background: #175C86;
-
+.titulo-fale-conosco, .titulo-projetos, .titulo-parceiros, .quemsomos {
+  scroll-margin-top: 80px;
 }
 
 .logoGama{
