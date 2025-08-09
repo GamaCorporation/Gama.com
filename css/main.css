@@ -509,6 +509,10 @@ a:hover{
  
 }
 
+.espacamento {
+  background-color: #175C86 !important;
+}
+
 /*footer*/
 
 .footer-elaborado {
@@ -603,5 +607,8 @@ a:hover{
   }
   .quemsomos, .parceiros, .sessao-projetos, .fale-conosco{
     height: auto !important;
+  }
+  .espacamento {
+    display: none !important;
   }
 }
