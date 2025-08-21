@@ -1,0 +1,42 @@
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.btn {
+  background: #0056ff;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #003bb3;
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url('../img/wave.svg') no-repeat center bottom;
+  background-size: cover;
+}
+
+.wave-bottom {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: -5px; 
+}
+
+.wave-top {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(180deg);
+  margin-bottom: -5px;  
+}
