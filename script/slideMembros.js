@@ -1,57 +1,97 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {    
+  // Slider da equipe - Mostrar 1 membro por vez em dispositivos móveis
+
+  const initEquipeSlider = () => {
     const wrapper = document.querySelector('.equipe-wrapper');
+    const grid = document.querySelector('.equipe-grid');
+    const members = document.querySelectorAll('.membro');
     const prevBtn = document.querySelector('.equipe-btn.prev');
     const nextBtn = document.querySelector('.equipe-btn.next');
     
-    if (!wrapper || !prevBtn || !nextBtn) return;
+    if (!wrapper || !grid || members.length === 0) return;
     
-    // Calcular a largura de um membro + gap
-    const member = document.querySelector('.membro');
-    if (!member) return;
+    let currentIndex = 0;
+    const gap = 25; // mesmo valor do CSS
+
+    // Pega a largura real de cada card
+    const getMemberWidth = () => members[0].offsetWidth;
+
+    // Função para atualizar o slider
+    const updateSlider = () => {
+        const memberWidth = getMemberWidth();
+        const translateX = -currentIndex * (memberWidth + gap);
+        grid.style.transform = `translateX(${translateX}px)`;
+
+        // Mostrar/ocultar botões conforme a posição
+        if (prevBtn) prevBtn.style.display = currentIndex > 0 ? 'flex' : 'none';
+        if (nextBtn) nextBtn.style.display = currentIndex < members.length - 1 ? 'flex' : 'none';
+        };
     
-    const gap = 25; // mesmo valor do gap no CSS
-    const memberWidth = member.offsetWidth + gap;
-    
-    // Função para rolar o slider
-    function scrollSlider(direction) {
-        const scrollAmount = memberWidth * 2; // Rola 2 membros por vez
-        wrapper.scrollBy({
-            left: direction === 'next' ? scrollAmount : -scrollAmount,
-            behavior: 'smooth'
-        });
+    // Navegação
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateSlider();
+        }
+      });
     }
     
-    // Event listeners para os botões
-    prevBtn.addEventListener('click', () => scrollSlider('prev'));
-    nextBtn.addEventListener('click', () => scrollSlider('next'));
-});
-
-// Script para garantir que os links estão funcionando
-document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('.socials a');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < members.length - 1) {
+          currentIndex++;
+          updateSlider();
+        }
+      });
+    }
     
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            console.log('Link clicado:', this.href);
-            // Remova o comentário abaixo para evitar que o link abra em nova janela
-            // e.preventDefault();
-            // window.location.href = this.href;
-        });
+    // Recalcular em redimensionamento
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        currentIndex = 0;
+        updateSlider();
+      }, 250);
     });
     
-    // Verifica se o Font Awesome foi carregado
-    const checkFontAwesome = setInterval(function() {
-        if (window.FontAwesome) {
-            console.log('Font Awesome carregado com sucesso!');
-            clearInterval(checkFontAwesome);
-        }
-    }, 100);
+    // Inicializar
+    updateSlider();
     
-    // Timeout para caso o Font Awesome não carregue
-    setTimeout(function() {
-        if (!window.FontAwesome) {
-            console.warn('Font Awesome não carregado. Tentando carregar localmente...');
-            // Aqui você pode carregar uma versão local se necessário
-        }
-    }, 3000);
+    // Esconder botões inicialmente se não for mobile
+    if (window.innerWidth > 992) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+    }
+  };
+  
+  // Inicializar o slider
+  initEquipeSlider();
+});
+
+// Script para garantir que os links sociais estão funcionando
+document.addEventListener('DOMContentLoaded', function() {
+  const links = document.querySelectorAll('.socials a');
+  
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      console.log('Link clicado:', this.href);
+    });
+  });
+
+  // Verifica se o Font Awesome foi carregado
+  const checkFontAwesome = setInterval(function() {
+    if (window.FontAwesome) {
+      console.log('Font Awesome carregado com sucesso!');
+      clearInterval(checkFontAwesome);
+    }
+  }, 100);
+
+  // Timeout caso não carregue
+  setTimeout(function() {
+    if (!window.FontAwesome) {
+      console.warn('Font Awesome não carregado. Verifique o link ou adicione localmente.');
+    }
+  }, 3000);
 });
