@@ -68,6 +68,9 @@
   display: none;
 }
 
+.navbar.active ~ .menu-overlay {
+  display: block;
+}
 /* Navbar styles */
 .navbar {
   display: flex;
@@ -101,4 +104,5 @@
   font-size: 24px;
   font-weight: bold;
   color: white;
+
 }
