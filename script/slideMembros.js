@@ -14,18 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const gap = 25; // mesmo valor do CSS
 
     // Pega a largura real de cada card
-    const getMemberWidth = () => members[0].offsetWidth;
+    const getMemberWidths = () => Array.from(members).map(m => m.offsetWidth + gap);
 
     // Função para atualizar o slider
     const updateSlider = () => {
-        const memberWidth = getMemberWidth();
-        const translateX = -currentIndex * (memberWidth + gap);
+        const widths = getMemberWidths();
+        const translateX = -widths.slice(0, currentIndex).reduce((acc, w) => acc + w, 0);
         grid.style.transform = `translateX(${translateX}px)`;
 
-        // Mostrar/ocultar botões conforme a posição
+        // Mostrar/ocultar botões
         if (prevBtn) prevBtn.style.display = currentIndex > 0 ? 'flex' : 'none';
         if (nextBtn) nextBtn.style.display = currentIndex < members.length - 1 ? 'flex' : 'none';
-        };
+    };
     
     // Navegação
     if (prevBtn) {
